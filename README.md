@@ -1,125 +1,117 @@
+# 🚀 ToonStream API
 
-🚀 ToonStream API
-Fast & lightweight Anime/Movie scraping API built with Bun + Elysia
+[![Bun](https://img.shields.io/badge/Runtime-Bun-black?style=for-the-badge&logo=bun)](https://bun.sh)
+[![Elysia](https://img.shields.io/badge/Framework-Elysia-lightgrey?style=for-the-badge&logo=elysia)](https://elysiajs.com)
+[![TypeScript](https://img.shields.io/badge/Language-TypeScript-blue?style=for-the-badge&logo=typescript)](https://www.typescriptlang.org)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg?style=for-the-badge)](https://opensource.org/licenses/MIT)
 
-✨ Features
-🔎 Search anime & movies
-🎬 Movie & series listing
-📺 Episode streaming sources
-⚡ Fast Bun runtime
-🧠 Redis caching support
-🛠 Clean REST API structure
-🌍 Serverless ready (Vercel compatible)
-📡 API Endpoints
-🏠 Home
-Copy code
+Fast and lightweight Anime/Movie scraping API built with **Bun + Elysia**. High performance, developer-friendly, and ready for production.
 
-GET /
-GET /home
-🔎 Search
-Copy code
+---
 
-GET /search/{query}/{page?}
-Example:
-Copy code
+### ✨ Features
 
-/search/naruto/1
-🎬 Movies
-Copy code
+* **🔎 Search** – Real-time anime and movie searching.
+* **🎬 Listings** – Organized movie and series listing.
+* **📺 Streaming** – Fast retrieval of episode streaming sources.
+* **⚡ Performance** – Powered by the Bun runtime for sub-millisecond overhead.
+* **🧠 Caching** – Optional Redis support for lightning-fast responses.
+* **🌍 Deployment** – Serverless ready (fully compatible with Vercel).
 
-GET /movies/{page?}
-GET /movie/info/{slug}
-GET /movie/sources/{slug}
-Example:
-Copy code
+---
 
-/movie/info/one-piece-film-red
-📺 Series
-Copy code
+### 📡 API Endpoints
 
-GET /series/{page?}
-GET /series/info/{slug}
-GET /episode/sources/{slug}
-Example:
-Copy code
+#### 🏠 Home
+| Method | Endpoint | Description |
+| :--- | :--- | :--- |
+| `GET` | `/` | API Status/Health check |
+| `GET` | `/home` | Fetch homepage content |
 
-/episode/sources/naruto-shippuden-episode-1
-🛠 Tech Stack
-Runtime: Bun
-Framework: Elysia
-Language: TypeScript
-Scraping: Cheerio
-Caching: Redis (optional)
-⚙️ Installation
-1️⃣ Clone Repository
-Bash
-Copy code
-git clone https://gitlab.com/binrot/toonstream-api.git
+#### 🔎 Search
+| Method | Endpoint | Example |
+| :--- | :--- | :--- |
+| `GET` | `/search/{query}/{page?}` | `/search/naruto/1` |
+
+#### 🎬 Movies
+| Method | Endpoint | Example |
+| :--- | :--- | :--- |
+| `GET` | `/movies/{page?}` | Get paginated movie list |
+| `GET` | `/movie/info/{slug}` | `/movie/info/one-piece-film-red` |
+| `GET` | `/movie/sources/{slug}` | Get video sources for a movie |
+
+#### 📺 Series
+| Method | Endpoint | Example |
+| :--- | :--- | :--- |
+| `GET` | `/series/{page?}` | Get paginated series list |
+| `GET` | `/series/info/{slug}` | Get metadata for a series |
+| `GET` | `/episode/sources/{slug}` | `/episode/sources/naruto-shippuden-episode-1` |
+
+---
+
+### 🛠 Tech Stack
+
+* **Runtime:** Bun
+* **Framework:** Elysia
+* **Language:** TypeScript
+* **Scraping:** Cheerio
+* **Caching:** Redis (optional)
+
+---
+
+### ⚙️ Installation
+
+**1. Clone the Repository**
+```bash
+git clone [https://gitlab.com/binrot/toonstream-api.git](https://gitlab.com/binrot/toonstream-api.git)
 cd toonstream-api
-2️⃣ Install Dependencies
-Bash
-Copy code
+```
+2. Install Dependencies
 bun install
-3️⃣ Setup Environment
-Create .env file:
-Env
-Copy code
+
+3. Setup Environment
+Create a .env file in the root directory:
+```
 PORT=3000
 REDIS_URL=your_redis_url
-4️⃣ Run Development Server
-Bash
-Copy code
+```
+4. Run Development Server
+```
 bun run dev
-Server runs at:
-Copy code
+```
 
-http://localhost:3000
-🚀 Deploy Now
-🔵 Deploy to Vercel
-��
-🟣 Deploy to Railway
-��
-🟢 Deploy to Render
-��
-🟡 Deploy to Fly.io
-Bash
-Copy code
-fly launch
 🧩 Project Structure
-Copy code
-
+```
 src/
- ├── index.ts
- ├── lib/
- │    ├── cache.ts
- │    ├── const.ts
- │    └── types.ts
- └── scrapers/
+ ├── index.ts           # Entry point
+ ├── lib/               # Shared utilities
+ │    ├── cache.ts      # Redis logic
+ │    ├── const.ts      # Constants
+ │    └── types.ts      # TypeScript interfaces
+ └── scrapers/          # Scraper implementations
       ├── home.ts
       ├── movie.ts
       ├── search.ts
       ├── series.ts
-      └── embed/
+      └── embed/        # Video provider scrapers
+```
 📦 Example Response
-JSON
-Copy code
+```
 {
   "success": true,
-  "data": { ... }
+  "data": {
+    "title": "One Piece Film: Red",
+    "year": "2022",
+    "sources": [...]
+  }
 }
+```
 🔒 Graceful Shutdown
-Handles SIGINT
-Handles SIGTERM
-Proper Redis connection closing
-📜 License
-MIT License
-👤 Author
-Made with ❤️ by Binrot
-If you want, I can also:
-🔥 Make it more premium (like big open-source projects)
-🧠 Add API documentation table format
-🌐 Add live demo badge
-🛡 Add rate limit info
-🧾 Add Swagger docs section
-🎨 Add dark themed README version
-Tell me what level you want — normal, pro, or insane.
+​The API is built for stability and handles exit signals properly:
+​✅ Handles SIGINT
+​✅ Handles SIGTERM
+​✅ Proper Redis connection closing
+​📜 License
+​Distributed under the MIT License.
+​👤 Author
+​Made with ❤️ by Binrot
